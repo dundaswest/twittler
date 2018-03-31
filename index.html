@@ -3,25 +3,50 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+  
+    <link rel="stylesheet" type= "text/css" href = "twtiller.css"/>
   </head>
   <body>
     <script>
 
-      $(document).ready(function(){
+      $(document).ready(function(){ 
         var $body = $('body');
         $body.html('');
+          //view
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
+        var updateBtn = $('<button>Update</button>');
+        updateBtn
+          .attr('id','update')
+          .appendTo($body);
+
+        var $feed = $('<div></div>'); 
+        $feed.attr('id','feed').appendTo($body);
+        var updateFeed = function() {
+        
+      
+
+          var index = streams.home.length - 1;
+          while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<div></div>');
+            var $user = $(tweet.user);
+            var user = $user.text();
+
+            $tweet.text('@' + tweet.user+ ': ' + tweet.message + ' [ '+ tweet.created_at + ' ]');
+            $tweet.appendTo($feed);
+            index -= 1;
+          }
         }
+        updateFeed();
+
+        
+        //event handelrs
+        updateBtn.on('click',function(event){
+            event.preventDefault();
+            updateFeed();
+        });
 
       });
-
-    </script>
+     </script>
   </body>
 </html>
