@@ -19,8 +19,7 @@
         var $feed = $('<div></div>'); 
         $feed.attr('id','feed').appendTo($body);
 
-        var updateFeed = function(){
-        var arr = $('streams.home');
+        var updateFeed = function() {
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
@@ -34,7 +33,7 @@
           button.addClass(tweet.user);
           button.addClass('button');
 
-          $tweet.text(': ' + tweet.message + '[' + tweet.created_at +']');
+          $tweet.text(': ' + tweet.message + ' [ ' + tweet.created_at +' ]');
          
           $tweet.appendTo($body);
           button.prependTo($tweet);
