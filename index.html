@@ -3,59 +3,58 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
-    <script src="moment.min.js"></script>
-    <link rel="stylesheet" type= "text/css" href = "twtiller.css"/>
+    <link rel="stylesheet" href="twittler.css">
   </head>
   <body>
     <script>
 
-      $(document).ready(function(){ 
+      $(document).ready(function(){
         var $body = $('body');
         $body.html('');
-          //view
-
-        var updateBtn = $('<button>Update</button>');
+         var updateBtn = $('<button>Update</button>');
         updateBtn
           .attr('id','update')
           .appendTo($body);
 
         var $feed = $('<div></div>'); 
         $feed.attr('id','feed').appendTo($body);
-        var updateFeed = function() {
-        
-      
 
-          var index = streams.home.length - 1;
-          while(index >= 0){
+        var updateFeed = function(){
+        var arr = $('streams.home');
+        var index = streams.home.length - 1;
+        while(index >= 0){
+          var tweet = streams.home[index];
+          var $tweet = $('<div></div>');
+          $tweet.addClass('tweet');
 
-            var tweet = streams.home[index];
-            var $tweet = $('<div></div>');
+          var userName = $(tweet.user);
 
-            var $user = $(tweet.user);
-            console.log($user.selector)
-            var userBtn = $('<button>userBtn</button>');
-            userBtn.attr('class','userBtn').text($user.selector);
-            userBtn.before($tweet);
+          var button = $('<button></button>');
+          button.text('@' + tweet.user);
+          button.addClass(tweet.user);
+          button.addClass('button');
+
+          $tweet.text(': ' + tweet.message + '[' + tweet.created_at +']');
+         
+          $tweet.appendTo($body);
+          button.prependTo($tweet);
+          index -= 1;
+          $('.tweet').on('click','button',function(e){
+            var targetName = $(this).text().slice(1);
+            console.log($(this));
+             $('.tweet').find($('.button')).not(`.${targetName}`).parent().hide();
             
-
-            var date = tweet.created_at;
-            date = moment().fromNow(date); 
-
-            $tweet.text('@' + tweet.user+ ': ' + tweet.message + ' [ '+ date + ' ]');
-            $tweet.appendTo($feed);
-            index -= 1;
-          }
-        }
-        updateFeed();
-
+        })
+      }
         
-        //event handelrs
-        updateBtn.on('click',function(event){
+      };
+      updateFeed();
+      updateBtn.on('click',function(event){
             event.preventDefault();
             updateFeed();
         });
-
       });
-     </script>
+
+    </script>
   </body>
 </html>
