@@ -1,7 +1,13 @@
 div {
+	position: static;
 	background-color: white;
-	border: 0.5px solid white;
+	border: 1px solid white;
 	
+}
+
+
+.button{
+	background-color: #CAF0ED;
 }
 
 #update{
@@ -10,4 +16,14 @@ div {
 	border-bottom: 0;
 	margin-bottom: 5em;
 
+}
+
+#title {
+	color : #36DCCF;
+	font-weight : bold;
+}
+
+#back {
+	margin-left: 10px;
+	background-color :#C1D6F5 ;
 }

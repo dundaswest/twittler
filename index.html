@@ -10,21 +10,36 @@
 
       $(document).ready(function(){
         var $body = $('body');
+
         $body.html('');
+
+        var title = $('<h1>Twittler</h1>');
+        title
+        .attr('id','title')
+        .appendTo($body);
+
          var updateBtn = $('<button>Update</button>');
-        updateBtn
+          updateBtn
           .attr('id','update')
           .appendTo($body);
+
+        var backBtn = $('<button>back</button>');
+            backBtn
+            .attr('id','back')
+            .appendTo($body);
 
         var $feed = $('<div></div>'); 
         $feed.attr('id','feed').appendTo($body);
 
-        var updateFeed = function() {
-        var index = streams.home.length - 1;
+        var updateFeed = function(){
+        var arr = $('streams.home');
+        var index = streams.home.length - 1; 
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
           $tweet.addClass('tweet');
+
+          $(title).text('Twittler');
 
           var userName = $(tweet.user);
 
@@ -33,24 +48,29 @@
           button.addClass(tweet.user);
           button.addClass('button');
 
-          $tweet.text(': ' + tweet.message + ' [ ' + tweet.created_at +' ]');
+          $tweet.text(' : ' + tweet.message + ' [' + tweet.created_at +']');
          
           $tweet.appendTo($body);
           button.prependTo($tweet);
           index -= 1;
           $('.tweet').on('click','button',function(e){
             var targetName = $(this).text().slice(1);
-            console.log($(this));
-             $('.tweet').find($('.button')).not(`.${targetName}`).parent().hide();
-            
+            $(title).text(targetName.toUpperCase());
+
+          $('.tweet').find($('.button')).not(`.${targetName}`).parent().hide();
+
         })
       }
         
       };
       updateFeed();
-      updateBtn.on('click',function(event){
+      updateBtn.on('click',function(event) {
             event.preventDefault();
             updateFeed();
+        });
+      backBtn.on('click',function(event) {
+          event.preventDefault;
+          updateFeed();
         });
       });
 
