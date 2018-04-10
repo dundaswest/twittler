@@ -13,12 +13,14 @@
 
         $body.html('');
 
+
+
         var title = $('<h1>Twittler</h1>');
         title
         .attr('id','title')
         .appendTo($body);
 
-         var updateBtn = $('<button>Update</button>');
+        var updateBtn = $('<button>Update</button>');
           updateBtn
           .attr('id','update')
           .appendTo($body);
@@ -34,49 +36,53 @@
         $feed.attr('id','feed').appendTo($body);
 
         var updateFeed = function(){
-        console.log(streams.home);
-        streams.home.sort((a,b) => a.created_at - b.created_at);
-        console.log(streams.home)
-        var arr = $('streams.home');
-        var index = streams.home.length - 1; 
+          $feed.html('');
+      
+          var arr = $(streams.home);
+     
+          var index = streams.home.length - 1; 
         
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.addClass('tweet');
+          while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<div></div>');
+            $tweet.addClass('tweet');
 
-          $(title).text('Twittler');
+            $(title).text('Twittler');
 
-          var userName = $(tweet.user);
+            var userName = $(tweet.user);
 
-          var button = $('<button></button>');
-          button.text('@' + tweet.user);
-          button.addClass(tweet.user);
-          button.addClass('button');
+            var button = $('<button></button>');
+            button.text('@' + tweet.user);
+            button.addClass(tweet.user);
+            button.addClass('button');
 
-          $tweet.text(' : ' + tweet.message + ' [' + tweet.created_at +']');
+            $tweet.text(' : ' + tweet.message + ' [' + tweet.created_at +']');
          
-          $tweet.appendTo($body);
-          button.prependTo($tweet);
-          index -= 1;
-          $('.tweet').on('click','button',function(e) {
-            var targetName = $(this).text().slice(1);
-            $(title).text(targetName.toUpperCase());
-            backBtn.insertAfter($(updateBtn));
-            backBtn.show();
-          $('.tweet').find($('.button')).not(`.${targetName}`).parent().hide();
+            $tweet.appendTo($feed);
 
-        })
-      }
+            button.prependTo($tweet);
+            index -= 1;
+            
+            $('.tweet').on('click','button',function(e) {
+              var targetName = $(this).text().slice(1);
+              $(title).text(targetName.toUpperCase());
+              backBtn.insertAfter($(updateBtn));
+              backBtn.show();
+            $('.tweet').find($('.button')).not(`.${targetName}`).parent().hide();
+            });
+          }
         
-      };
+        };
+
       updateFeed();
+
       updateBtn.on('click',function(event) {
             event.preventDefault();
             updateFeed();
-        });
+      });
+
       backBtn.on('click',function(event) {
-          event.preventDefault;
+          event.preventDefault();
           $(this).hide();
           updateFeed();
         });
