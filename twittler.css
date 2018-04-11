@@ -1,29 +1,43 @@
 div {
 	position: static;
 	background-color: white;
+	margin : 10px;
+	padding : 10px;
+	border: 2px solid #00BCD4;
+	max-width: 1200px;
+	border-radius: 25px;
+}
+
+#feed {
 	border: 1px solid white;
-	
+	margin-left: 130px;
 }
 
-
-.button{
+.button {
 	background-color: #CAF0ED;
+	border-radius: 25px;
 }
 
-#update{
-	background-color: #F0CECA;
-	border: 5px;
-	border-bottom: 0;
+#update {
+	font-size: 15px;
+	background-color: #5CA1DA;
+	border: 2.5px solid #C1DDF5;
 	margin-bottom: 5em;
+	margin-left : 130px;
 
 }
 
 #title {
 	color : #36DCCF;
 	font-weight : bold;
+	font-size: 40px;
+	text-align: center;
+	width:100%;
 }
 
 #back {
+	font-size: 15px;
 	margin-left: 10px;
+	border: 2.5px solid #BACBDA;
 	background-color :#C1D6F5 ;
 }

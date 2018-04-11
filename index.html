@@ -3,6 +3,7 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="moment.min.js"></script>
     <link rel="stylesheet" href="twittler.css">
   </head>
   <body>
@@ -30,7 +31,7 @@
             .insertAfter($(updateBtn))
             .attr('id','back');
             backBtn.hide();
-            
+        
 
         var $feed = $('<div></div>'); 
         $feed.attr('id','feed').appendTo($body);
@@ -56,13 +57,15 @@
             button.addClass(tweet.user);
             button.addClass('button');
 
+            tweet.created_at = moment().startOf(tweet.created_at).fromNow();  
+
             $tweet.text(' : ' + tweet.message + ' [' + tweet.created_at +']');
          
             $tweet.appendTo($feed);
 
             button.prependTo($tweet);
             index -= 1;
-            
+
             $('.tweet').on('click','button',function(e) {
               var targetName = $(this).text().slice(1);
               $(title).text(targetName.toUpperCase());
